@@ -1,0 +1,13 @@
+name = "DigitalHolography"
+uuid = "91df39b6-5e55-447c-8840-2e09be0f70fd"
+authors = ["Shuhei Yoshida <yshuhei@ele.kindai.ac.jp> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.9"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
