@@ -66,18 +66,22 @@ Using 2x2 pixels with phase differences of ``\\dfrac{\\pi}{2}`` each as units, t
 """
 function ParallelPSDH(I)
     Ny, Nx = size(I)
-    u = zeros(ComplexF64, Ny, Nx)
+    u = Array{ComplexF64}(undef, Ny, Nx)
 
     @fastmath @inbounds for j ∈ 1:Nx - 1, i ∈ 1:Ny - 1
-        I₁ = I[i + i%2, j + j%2]
-		I₂ = I[i + i%2, j + (j + 1)%2]
-		I₃ = I[i + (i + 1)%2, j + j%2]
-		I₄ = I[i + (i + 1)%2, j + (j + 1)%2]
+        I₁ = I[i+(i+1)%2, j+j%2]        # +cos
+        I₂ = I[i+(i+1)%2, j+(j+1)%2]    # +sin
+        I₃ = I[i+i%2, j+(j+1)%2]        # -cos
+        I₄ = I[i+i%2, j+j%2]            # -sin
         ϕ = atan(I₂ - I₄, I₁ - I₃)
         v = (I₁ + I₂ + I₃ + I₄)/4
         w = √((I₁ - I₃)^2 + (I₂ - I₄)^2)/2
         u[i, j] = √((v - √(v^2 - w^2 + 0im))/2)*exp(im*ϕ)
     end
+
+    u[:,end] = u[:,end-1]
+    u[end,:] = u[end-1,:]
+    u[end,end] = u[end-1,end-1]
 
     return u
 end

@@ -1,7 +1,7 @@
 name = "DigitalHolography"
 uuid = "91df39b6-5e55-447c-8840-2e09be0f70fd"
 authors = ["Shuhei Yoshida <yshuhei@ele.kindai.ac.jp> and contributors"]
-version = "0.1.0"
+version = "0.1.1"
 
 [compat]
 julia = "1.6, 1.7, 1.8, 1.9, 1.10"
